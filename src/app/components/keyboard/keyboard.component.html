@@ -1,1 +1,15 @@
-<p>keyboard works!</p>
+<div id="keyboard">
+    <div id="numbers">
+        <button class="num-button"
+                *ngFor="let num of numbers">
+            {{num}}
+        </button>    
+    </div>
+    
+    <div id="operators">
+        <button class="num-button"
+                *ngFor="let operator of operators">
+            {{operator}}
+        </button>    
+    </div>
+</div>
