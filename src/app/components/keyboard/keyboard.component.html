@@ -1,14 +1,16 @@
 <div id="keyboard">
     <div id="numbers">
         <button class="num-button"
-                *ngFor="let num of numbers">
+                *ngFor="let num of numbers"
+                (click)="showNumber(num)">
             {{num}}
-        </button>    
+        </button>   
     </div>
     
     <div id="operators">
         <button class="num-button"
-                *ngFor="let operator of operators">
+                *ngFor="let operator of operators"
+                (click)="showOperator(operator)">
             {{operator}}
         </button>    
     </div>

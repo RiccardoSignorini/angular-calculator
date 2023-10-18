@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,13 +9,27 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./keyboard.component.scss']
 })
 export class KeyboardComponent {
-  numbers: Number[];
+  numbers: number[];
   operators: string[];
+
+  @Output() showOnDisplay: EventEmitter<number>;
+  @Output() showOperatorOnDisplay: EventEmitter<string>;
 
   constructor()
   {
     this.numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     this.operators = ['+', '*', '-', '/', '=']
+    this.showOnDisplay = new EventEmitter<number>();
+    this.showOperatorOnDisplay = new EventEmitter<string>();
   }
 
+  showNumber(num: number)
+  {
+    this.showOnDisplay.emit(num);
+  }
+
+  showOperator(operator: string)
+  {
+    this.showOperatorOnDisplay.emit(operator);
+  }
 }
