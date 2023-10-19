@@ -14,8 +14,8 @@ import { KeyboardComponent } from './components/keyboard/keyboard.component';
 })
 export class AppComponent {
 
-  operatore1: number;
-  operatore2: number;
+  operatore1: string;
+  operatore2: string;
   operation: string;
   result: number;
   showDisplay: string;
@@ -25,49 +25,53 @@ export class AppComponent {
     private _operationsService: OperationsService
   ) 
   {
-    this.operatore1 = NaN;
-    this.operatore2 = NaN;
+    this.operatore1 = '';
+    this.operatore2 = '';
     this.operation = '';
     this.result = 0;
     this.showDisplay = '';
   }
 
-  showNumberOnDisplay(numero: number) 
+  showNumberOnDisplay(numero: string) 
   {
     if (this.operation == '') 
     {
-      this.operatore1 = numero;
+      this.operatore1 += numero;
       this.showDisplay = this.operatore1.toString();
       console.log(this.operatore1, 'operatore1');
     }
     else 
     {
-      this.operatore2 = numero;
+      this.operatore2 += numero;
       this.showDisplay = this.operatore2.toString();
       console.log(this.operatore2, 'operatore2');
     }
   }
 
   doOperation(operatore: string): void 
-  {
+  { 
+
+    const operatoreNum1: number = parseInt(this.operatore1);
+    const operatoreNum2: number = parseInt(this.operatore2);
+
     if (operatore == '=') 
     {
       switch (this.operation) 
       {
         case "+":
-          this.result = this._operationsService.sum(this.operatore1, this.operatore2)
+          this.result = this._operationsService.sum(operatoreNum1, operatoreNum2)
           break;
 
         case "-":
-          this.result = this._operationsService.substract(this.operatore1, this.operatore2)
+          this.result = this._operationsService.substract(operatoreNum1, operatoreNum2)
           break;
 
         case "*":
-          this.result = this._operationsService.multiply(this.operatore1, this.operatore2)
+          this.result = this._operationsService.multiply(operatoreNum1, operatoreNum2)
           break;
 
         case "/":
-          this.result = this._operationsService.divide(this.operatore1, this.operatore2)
+          this.result = this._operationsService.divide(operatoreNum1, operatoreNum2)
           break;
 
         default:
@@ -75,9 +79,9 @@ export class AppComponent {
           break;
       }
 
-      if (isNaN(this.operatore2)) 
+      if (isNaN(operatoreNum2)) 
       {
-        this.result = this.operatore1;
+        this.result = operatoreNum1;
       }
 
       this.showDisplay = this.result.toString();
@@ -92,8 +96,8 @@ export class AppComponent {
 
   emptyOperation(): void
   {
-    this.operatore1 = this.result;
-    this.operatore2 = NaN;
+    this.operatore1 = this.result.toString();
+    this.operatore2 = '';
     this.operation = '';
   }
 
