@@ -33,11 +33,13 @@ export class AppComponent {
     if (this.operation == '')
     {
       this.operatore1 = numero;
+      this.showDisplay = this.operatore1.toString();
       console.log(this.operatore1, 'operatore1');  
     }
     else
     {
       this.operatore2 = numero;
+      this.showDisplay = this.operatore2.toString();
       console.log(this.operatore2, 'operatore2');  
     }
   }
@@ -49,6 +51,7 @@ export class AppComponent {
       if (this.operation == '+')
       {
         this.result = this.operatore1 + this.operatore2;
+        this.showDisplay = this.result.toString();
         console.log(this.result);
       }
       // else if (this.operation == '-')
